@@ -86,8 +86,8 @@ Seq[Any](format.raw/*1.70*/("""
           </div>
 
           <div id="choose-type-user">
-            <input type="checkbox" onclick="validate()" name="action" id="track" value="track" /><label for="track">Driver</label>
-            <input type="checkbox"  name="action" id="message" value="message" /><label for="message">Passenger</label>
+            <input type="checkbox" onclick="validate()" name="driver" id="is-driver" value="track" /><label for="track">Driver</label>
+            <input type="checkbox"  name="passenger" id="is-passenger" value="message" /><label for="message">Passenger</label>
           </div>
 
           <div id="input-number-passenger" class="input" style="visibility: hidden;display: none">
@@ -112,7 +112,7 @@ Seq[Any](format.raw/*1.70*/("""
 
       <script>
               function validate()"""),format.raw/*83.34*/("""{"""),format.raw/*83.35*/("""
-                """),format.raw/*84.17*/("""var remember = document.getElementById('track');
+                """),format.raw/*84.17*/("""var remember = document.getElementById('is-driver');
                 if (remember.checked)"""),format.raw/*85.38*/("""{"""),format.raw/*85.39*/("""
 
                   """),format.raw/*87.19*/("""document.getElementById('input-number-passenger').setAttribute('style','visibility:visible;margin-bottom: 10px');
@@ -155,10 +155,10 @@ Seq[Any](format.raw/*1.70*/("""
 object register extends register_Scope0.register
               /*
                   -- GENERATED --
-                  DATE: Sat Apr 02 15:51:37 BRT 2016
+                  DATE: Sat Apr 02 16:15:30 BRT 2016
                   SOURCE: /home/carlos/git/web-app-si-v2/app/views/register.scala.html
-                  HASH: f928cf55547961f3364f33ad6e44e76a26d3fa46
-                  MATRIX: 791->1|954->69|982->72|1004->86|1043->88|1070->89|1316->309|1330->315|1403->367|1532->469|1547->475|1617->523|1897->776|1963->833|2003->835|2042->846|2118->895|2152->908|2214->939|2252->950|2267->956|2315->995|2355->997|2394->1008|4091->2674|4128->2684|4559->3087|4588->3088|4633->3105|4747->3191|4776->3192|4824->3212|4983->3343|5012->3344|5044->3348|5073->3349|5121->3369|5272->3492|5301->3493|5344->3508|5373->3509|5440->3548|5469->3549|5514->3566|5609->3633|5638->3634|5715->3680
+                  HASH: b71ec111d84f5014cf8bd518aedb55949391ce6c
+                  MATRIX: 791->1|954->69|982->72|1004->86|1043->88|1070->89|1316->309|1330->315|1403->367|1532->469|1547->475|1617->523|1897->776|1963->833|2003->835|2042->846|2118->895|2152->908|2214->939|2252->950|2267->956|2315->995|2355->997|2394->1008|4103->2686|4140->2696|4571->3099|4600->3100|4645->3117|4763->3207|4792->3208|4840->3228|4999->3359|5028->3360|5060->3364|5089->3365|5137->3385|5288->3508|5317->3509|5360->3524|5389->3525|5456->3564|5485->3565|5530->3582|5625->3649|5654->3650|5731->3696
                   LINES: 27->1|32->1|34->3|34->3|34->3|35->4|40->9|40->9|40->9|42->11|42->11|42->11|57->26|57->26|57->26|58->27|59->28|59->28|61->30|63->32|63->32|63->32|63->32|64->33|100->69|102->71|114->83|114->83|115->84|116->85|116->85|118->87|120->89|120->89|120->89|120->89|122->91|123->92|123->92|124->93|124->93|126->95|126->95|127->96|128->97|128->97|137->106
                   -- GENERATED --
               */

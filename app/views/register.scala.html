@@ -55,8 +55,8 @@
           </div>
 
           <div id="choose-type-user">
-            <input type="checkbox" onclick="validate()" name="action" id="track" value="track" /><label for="track">Driver</label>
-            <input type="checkbox"  name="action" id="message" value="message" /><label for="message">Passenger</label>
+            <input type="checkbox" onclick="validate()" name="driver" id="is-driver" value="track" /><label for="track">Driver</label>
+            <input type="checkbox"  name="passenger" id="is-passenger" value="message" /><label for="message">Passenger</label>
           </div>
 
           <div id="input-number-passenger" class="input" style="visibility: hidden;display: none">
@@ -81,7 +81,7 @@
 
       <script>
               function validate(){
-                var remember = document.getElementById('track');
+                var remember = document.getElementById('is-driver');
                 if (remember.checked){
 
                   document.getElementById('input-number-passenger').setAttribute('style','visibility:visible;margin-bottom: 10px');

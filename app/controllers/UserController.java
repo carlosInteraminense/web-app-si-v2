@@ -103,7 +103,9 @@ public class UserController extends Controller{
         String email = form.field("email").value();
         String password = form.field("password").value();
         String newPassword = form.field("new-password").value();
-
+        String driver = form.field("driver").value();
+        String passenger = form.field("passenger").value();
+        String numberPassenges = form.field("numberPassenges").value();
 
 
         if (name == null || email == null || password == null)
@@ -132,6 +134,13 @@ public class UserController extends Controller{
         {
             return showRegister("As senhas nao correspondem");
         }
+        else if(driver != null)
+        {
+            if(numberPassenges == null || numberPassenges.trim().equals(""))
+            {
+                return showRegister("Se você é um motorista, coloque o numero de vagas");
+            }
+        }
         else {
             User user = null;
             try {
@@ -143,9 +152,10 @@ public class UserController extends Controller{
             {
                 db.writeInDataBase(user);
             }
-
-            return showLogin("Usuário cadastrado com sucesso", false);
         }
+
+        return showLogin("Usuário cadastrado com sucesso", false);
+
     }
 
 
