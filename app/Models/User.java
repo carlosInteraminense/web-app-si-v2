@@ -7,27 +7,69 @@ public class User {
 
     private String registration;
 
-    private String email;
+    private String email,password, district, name, destinationAddress, departureTime, returnTime;
 
-    private String password;
+    private int houseNumber;
 
-    private String adress;
+    private boolean isDriver;
 
-    private String name;
-
+    private boolean isFirstLogin;
 
     public User() {}
 
-    public User(String name, String registration, String email, String password) throws Exception
+    public User(String name, String registration, String email, String password, boolean isDriver, String district, int houseNumber) throws Exception
     {
         this.registration = registration;
         setEmail(email);
         setPassword(password);
-        adress = "";
+        setDestinationAddress(district);
+        setHouseNumber(houseNumber);
         setName(name);
+        this.isDriver = isDriver;
+        isFirstLogin = true;
+    }
+
+    public boolean getIsFirstLogin()
+    {
+        return isFirstLogin;
+    }
+
+    public void setIsFirstLogin(boolean isFirstLogin)
+    {
+        this.isFirstLogin = isFirstLogin;
     }
 
     public String getName(){ return name;}
+
+    public boolean getIsDriver()
+    {
+        return isDriver;
+    }
+
+    public void setHouseNumber(int number)
+    {
+        houseNumber = number;
+    }
+
+    public int getHouseNumber()
+    {
+        return houseNumber;
+    }
+
+    public void setDestinationAddress(String destinationAddress) throws Exception
+    {
+        if(destinationAddress == null || destinationAddress.trim().equals(""))
+        {
+            throw new Exception("Destination Address invalid");
+        }
+
+        this.destinationAddress = destinationAddress;
+    }
+
+    public String getDestinationAddress()
+    {
+        return destinationAddress;
+    }
 
     public void setName(String name) throws Exception{
         if(name == null || name.trim().equals(""))
@@ -47,9 +89,9 @@ public class User {
         return email;
     }
 
-    public String getAdress()
+    public String getDistrict()
     {
-        return adress;
+        return district;
     }
 
     public String getPassword(){
@@ -77,7 +119,7 @@ public class User {
         this.password = password;
     }
 
-    public void setRegistration(String registration) throws Exception
+    private void setRegistration(String registration) throws Exception
     {
         if(registration == null || registration.trim().equals(""))
         {
@@ -88,15 +130,15 @@ public class User {
     }
 
 
-    public void setAdress(String adress) throws Exception
+    private void setDistrict(String district) throws Exception
     {
 
-        if(adress == null || adress.trim().equals(""))
+        if(district == null || district.trim().equals(""))
         {
             throw new Exception("Invalid Adress.");
         }
 
-        this.adress = adress;
+        this.district = district;
     }
 
 

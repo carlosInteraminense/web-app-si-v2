@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carlos/git/web-app-si-v2/conf/routes
-// @DATE:Sat Apr 02 15:48:22 BRT 2016
+// @DATE:Wed Apr 06 00:54:25 BRT 2016
 
 import play.api.routing.JavaScriptReverseRoute
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
@@ -15,7 +15,7 @@ import _root_.play.libs.F
 package controllers.javascript {
   import ReverseRouteContext.empty
 
-  // @LINE:15
+  // @LINE:16
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -23,7 +23,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:15
+    // @LINE:16
     def at: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.at",
       """
@@ -45,7 +45,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:9
+  // @LINE:8
   class ReverseUserController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -53,17 +53,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:16
-    def authenticate: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.UserController.authenticate",
-      """
-        function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "login"})
-        }
-      """
-    )
-  
-    // @LINE:17
+    // @LINE:18
     def register: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.UserController.register",
       """
@@ -73,17 +63,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:11
-    def showRegister: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.UserController.showRegister",
-      """
-        function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "register"})
-        }
-      """
-    )
-  
-    // @LINE:9
+    // @LINE:10
     def showLogin: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.UserController.showLogin",
       """
@@ -93,6 +73,36 @@ package controllers.javascript {
             return _wA({method:"GET", url:"""" + _prefix + """"})
           }
         
+        }
+      """
+    )
+  
+    // @LINE:12
+    def showRegister: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.UserController.showRegister",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "register"})
+        }
+      """
+    )
+  
+    // @LINE:8
+    def showPerfil: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.UserController.showPerfil",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "perfilDriver"})
+        }
+      """
+    )
+  
+    // @LINE:17
+    def authenticate: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.UserController.authenticate",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "login"})
         }
       """
     )

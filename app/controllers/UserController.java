@@ -37,6 +37,17 @@ public class UserController extends Controller{
         return true;
     }
 
+    public static Result showPerfil(){
+        User user = getUser();
+
+        if (user.getIsDriver())
+        {
+            return ok(views.html.perfilDriver.render(user));
+        }
+        return ok(views.html.perfilPassenger.render());
+
+
+    }
 
     public static Result authenticate() {
         if(db == null){
@@ -60,7 +71,12 @@ public class UserController extends Controller{
             actualUser = user;
             session().clear();
             session("email", user.getEmail());
-            return redirect(routes.Application.index());
+            if(user.getIsFirstLogin())
+            {
+                user.setIsFirstLogin(false);
+                //return showFilledAddress()...
+            }
+            return showPerfil();
         }
     }
 
@@ -83,11 +99,16 @@ public class UserController extends Controller{
         return showRegister("");
     }
 
+    private static boolean isRegistrationValid(String registration)
+    {
+        int intRegistration = Integer.parseInt(registration);
+
+        return (!registration.trim().equals("")) && (registration.length() == 9) && (intRegistration > 100000000 && intRegistration < 115199999);
+    }
 
     public static Result register() {
 
-        if(db == null)
-        {
+        if(db == null) {
             try {
                 db = new DBManager();
             } catch (Exception e) {
@@ -106,55 +127,65 @@ public class UserController extends Controller{
         String driver = form.field("driver").value();
         String passenger = form.field("passenger").value();
         String numberPassenges = form.field("numberPassenges").value();
+        String destinationAddress = form.field("district").value();
+        String houseNumber = form.field("house-number").value();
 
 
-        if (name == null || email == null || password == null)
-        {
-            return showRegister("Ocorreu um erro. Tente novamente");
+        boolean isDriver = false;
 
-        }
-        else if(name.trim().equals(""))
-        {
-            return showRegister("Nome inválido");
-        }
+        if (name == null || email == null || password == null ||registration == null || destinationAddress == null
+                || houseNumber == null) {
+            return showRegister("An error ocurred. Please, try again.");
 
-        else if(email.trim().equals(""))
+        } else if(name.trim().equals("")){
+            return showRegister("Invalid name");
+        } else if(!isRegistrationValid(registration)) {
+            return showRegister("Invalid Registration");
+
+        } else if (db.searchUserByRegistration(registration) != null) {
+            return showRegister("Registration aready registered");
+
+        } else if(email.trim().equals("")) {
+            return showRegister("Invalid Email");
+
+        } else if (isRegisteredEmail(email)) {
+            return showRegister("E-mail already registered");
+
+        } else if (password.trim().equals("")) {
+            return showRegister("Invalid Password");
+
+        } else if(!password.equals(newPassword)) {
+            return showRegister("The passwords don't match");
+
+        }else if (destinationAddress.trim().equals("")){
+            return showRegister("Invalid District");
+
+        }else if(houseNumber.trim().equals(""))
         {
-            return showRegister("Email inválido");
+            return showRegister("House number invalid");
         }
-        else if (isRegisteredEmail(email))
-        {
-            return showRegister("E-mail já cadastrado");
-        }
-        else if (password.trim().equals(""))
-        {
-            return showRegister("Senha Inválda");
-        }
-        else if(!password.equals(newPassword))
-        {
-            return showRegister("As senhas nao correspondem");
-        }
-        else if(driver != null)
-        {
-            if(numberPassenges == null || numberPassenges.trim().equals(""))
-            {
-                return showRegister("Se você é um motorista, coloque o numero de vagas");
+        else if (driver == null && passenger == null){
+            return showRegister("Select the type of user, Driver or Passenger.");
+
+        } else if(driver != null) {
+            if(numberPassenges == null || numberPassenges.trim().equals("")) {
+                return showRegister("If you are a driver, put the number of passenger");
             }
-        }
-        else {
+            isDriver = true;
+
+        } else {
             User user = null;
             try {
-                user = new User(name, registration, email, password);
+                user = new User(name, registration, email, password, isDriver, destinationAddress, Integer.parseInt(houseNumber));
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if(user != null)
-            {
+            if(user != null) {
                 db.writeInDataBase(user);
             }
         }
 
-        return showLogin("Usuário cadastrado com sucesso", false);
+        return showLogin("User successfully registered", false);
 
     }
 
