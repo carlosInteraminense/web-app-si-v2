@@ -54,9 +54,17 @@
             <input type="password" name="new-password" class="form-control" placeholder="Confirm password">
           </div>
 
+          <div id="input-adress" class="input">
+            <input type="text" name="district" class="form-control" placeholder="Ditrict"/>
+          </div>
+
+          <div id="input-adress" class="input">
+            <input type="text" name="house-number" class="form-control" placeholder="House Number"/>
+          </div>
+
           <div id="choose-type-user">
-            <input type="radio" value="driver" onclick="validate()"/>Driver
-            <input type="radio"value="passenger" />Passenger
+            <input type="radio" name="driver" onclick="show_n_vagas()"  id="is-driver" value="track"/>Driver
+            <input type="radio"  name="passenger" onclick="hide_n_vagas()" id="is-passenger" checked />Passenger
           </div>
 
           <div id="input-number-passenger" class="input" style="visibility: hidden;display: none">
@@ -80,14 +88,29 @@
 
 
       <script>
-              function validate(){
-                var remember = document.getElementById('track');
+              function hide_n_vagas(){
+                var remember = document.getElementById('is-passenger');
+                var driver = document.getElementById('is-driver');
                 if (remember.checked){
+                  driver.checked = false;
+                  document.getElementById('input-number-passenger').setAttribute('style','visibility:hidden; display:none');
 
+                }else{
+                  driver.checked = true;
+                  document.getElementById('input-number-passenger').setAttribute('style','visibility:visible;margin-bottom: 10px');
+                }
+              };
+
+
+              function show_n_vagas(){
+                var remember = document.getElementById('is-driver');
+                var passenger = document.getElementById('is-passenger');
+                if (remember.checked){
+                  passenger.checked = false;
                   document.getElementById('input-number-passenger').setAttribute('style','visibility:visible;margin-bottom: 10px');
 
                 }else{
-
+                  passenger.checked = true;
                   document.getElementById('input-number-passenger').setAttribute('style','visibility:hidden; display:none');
                 }
               };

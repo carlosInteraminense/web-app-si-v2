@@ -17,7 +17,6 @@ public class UserController extends Controller{
     private static DBManager db = null;
     private static User actualUser;
 
-
     public static Result showLogin(String mensagem, boolean erro) {
         return ok(views.html.login.render(loginForm, mensagem, erro));
     }
@@ -74,7 +73,6 @@ public class UserController extends Controller{
             if(user.getIsFirstLogin())
             {
                 user.setIsFirstLogin(false);
-                //return showFilledAddress()...
             }
             return showPerfil();
         }
@@ -93,7 +91,6 @@ public class UserController extends Controller{
     public static Result showRegister(String mensagem) {
         return ok(views.html.register.render(loginForm, mensagem));
     }
-
 
     public static Result showRegister() {
         return showRegister("");
@@ -188,7 +185,6 @@ public class UserController extends Controller{
         return showLogin("User successfully registered", false);
 
     }
-
 
     public static Result logout() {
         session().clear();
